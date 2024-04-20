@@ -1,8 +1,14 @@
 if (document.readyState === 'complete') {
-    console.log('content loaded')
     const element = document.getElementsByClassName('serviceworker adownload cssanimations csstransitions webp webp-alpha webp-animation webp-lossless wf-loading')[0]
     if (element) {
         const initiate = () => {
+            window.addEventListener('keydown',(e) => {  
+                if (e.keyIdentifier =='U+000A' || e.keyIdentifier =='Enter' || e.keyCode == 13) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    return false
+                }
+              }, true);
             // Hiding all unnecessary elements
 
             const headerElement = document.getElementsByClassName('x1n2onr6 xfo81ep x9f619 x78zum5 x6s0dn4 x13a6bvl xh8yej3 x7j6532 x889kno x1a8lsjc x1swvt13 x1pi30zi x1pl83jw')[0];
@@ -80,12 +86,18 @@ if (document.readyState === 'complete') {
                 if (!desiredContact) {
                     alert('There is no such contact')
                 } else {
-                    const clickEvent = new MouseEvent('mousedown', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true
-                    });
-                    desiredContact.dispatchEvent(clickEvent)
+                    const ghostElement = document.getElementsByClassName('x1iyjqo2 x6ikm8r x10wlt62 x1n2onr6 xlyipyv xuxw1ft x1rg5ohu _ao3e')[0];
+                    const searchBox = document.getElementsByClassName('selectable-text copyable-text')[0]
+                    if (ghostElement.textContent.toLowerCase() !== searchBox.textContent.toLowerCase()) {
+                        alert('There is no such contact')
+                    } else {
+                        const clickEvent = new MouseEvent('mousedown', {
+                            view: window,
+                            bubbles: true,
+                            cancelable: true
+                        });
+                        desiredContact.dispatchEvent(clickEvent)
+                    }
                 }
             }
 
