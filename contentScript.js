@@ -87,16 +87,26 @@ if (document.readyState === 'complete') {
                     alert('There is no such contact')
                 } else {
                     const ghostElement = document.getElementsByClassName('x1iyjqo2 x6ikm8r x10wlt62 x1n2onr6 xlyipyv xuxw1ft x1rg5ohu _ao3e')[0];
-                    const searchBox = document.getElementsByClassName('selectable-text copyable-text')[0]
-                    if (ghostElement.textContent.toLowerCase() !== searchBox.textContent.toLowerCase()) {
-                        alert('There is no such contact')
+                    const searchBox = document.getElementsByClassName('selectable-text copyable-text')[0];
+
+                    const clickEvent = new MouseEvent('mousedown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+
+                    if (searchBox.textContent.charAt(0) !== `+`) {
+                        if (ghostElement.textContent.toLowerCase() !== searchBox.textContent.toLowerCase()) {
+                            alert('There is no such contact')
+                        } else {
+                            desiredContact.dispatchEvent(clickEvent)
+                        }
                     } else {
-                        const clickEvent = new MouseEvent('mousedown', {
-                            view: window,
-                            bubbles: true,
-                            cancelable: true
-                        });
-                        desiredContact.dispatchEvent(clickEvent)
+                        if (ghostElement.textContent.replace(/\s/g, '') === searchBox.textContent.replace(/\s/g, '')) {
+                            desiredContact.dispatchEvent(clickEvent)
+                        } else {
+                            alert('There is no such contact')
+                        }
                     }
                 }
             }
