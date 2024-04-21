@@ -96,7 +96,7 @@ if (document.readyState === 'complete') {
                     });
 
                     if (searchBox.textContent.charAt(0) !== `+`) {
-                        if (ghostElement.textContent.toLowerCase() !== searchBox.textContent.toLowerCase()) {
+                        if (ghostElement.textContent.toLowerCase().trim() !== searchBox.textContent.toLowerCase().trim()) {
                             alert('There is no such contact')
                         } else {
                             desiredContact.dispatchEvent(clickEvent)
